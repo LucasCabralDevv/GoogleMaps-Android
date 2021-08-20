@@ -24,7 +24,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -32,11 +31,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        val latitude = 47.139570
+        val longitude = 9.524810
+        val zoomLevel = 17.5f
 
-        // Add a marker in Sydney and move the camera
-        val vaduzCastle = LatLng(47.139570, 9.524810)
-        map.addMarker(MarkerOptions().position(vaduzCastle).title("Marker in Vaduz Castle"))
-        map.moveCamera(CameraUpdateFactory.newLatLng(vaduzCastle))
+        val vaduzCastleLatLng = LatLng(latitude, longitude)
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(vaduzCastleLatLng, zoomLevel))
+        map.addMarker(MarkerOptions().position(vaduzCastleLatLng).title("Marker in Vaduz Castle"))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
