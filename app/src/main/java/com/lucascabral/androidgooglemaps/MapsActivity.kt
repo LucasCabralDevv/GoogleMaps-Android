@@ -39,6 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(vaduzCastleLatLng, zoomLevel))
         map.addMarker(MarkerOptions().position(vaduzCastleLatLng).title("Marker in Vaduz Castle"))
+        setMapLongClick(map)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,5 +71,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun setMapLongClick(map: GoogleMap) {
+        map.setOnMapLongClickListener { latLng ->
+            map.addMarker(
+                MarkerOptions().position(latLng)
+            )
+        }
     }
 }
