@@ -11,9 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.lucascabral.androidgooglemaps.databinding.ActivityMapsBinding
 import java.util.*
 
@@ -38,14 +36,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
         val latitude = 47.139570
         val longitude = 9.524810
-        val zoomLevel = 17.5f
+        val zoomLevel = 17.4f
 
         val vaduzCastleLatLng = LatLng(latitude, longitude)
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(vaduzCastleLatLng, zoomLevel))
         map.addMarker(MarkerOptions().position(vaduzCastleLatLng).title("Marker in Vaduz Castle"))
         setMapLongClick(map)
         setPoiClick(map)
-        setMapStyle(map)
+        setMapStyle(map) // Excluir ou comentar a linha 44 para testar a função.
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -93,6 +92,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 MarkerOptions().position(latLng)
                     .title(getString(R.string.dropped_pin))
                     .snippet(snippet)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
             )
         }
     }
