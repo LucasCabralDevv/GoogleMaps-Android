@@ -37,11 +37,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val latitude = 47.139570
         val longitude = 9.524810
         val zoomLevel = 17.4f
+        val overlaySize = 100f
 
         val vaduzCastleLatLng = LatLng(latitude, longitude)
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(vaduzCastleLatLng, zoomLevel))
         map.addMarker(MarkerOptions().position(vaduzCastleLatLng).title("Marker in Vaduz Castle"))
+        val androidOverlay = GroundOverlayOptions()
+            .image(BitmapDescriptorFactory.fromResource(R.drawable.android))
+            .position(vaduzCastleLatLng, overlaySize)
+
+        map.addGroundOverlay(androidOverlay)
         setMapLongClick(map)
         setPoiClick(map)
         setMapStyle(map) // Excluir ou comentar a linha 44 para testar a função.
